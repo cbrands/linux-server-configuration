@@ -60,3 +60,19 @@ To                         Action      From
 80/tcp (v6)                ALLOW       Anywhere (v6)             
 123/udp (v6)               ALLOW       Anywhere (v6)    
 ```
+
+## Configure Local timezone to UTC
+Timezone can be set with `sudo dpkg-reconfigure tzdata`
+* select 'None of the above'
+* select 'UTC'
+* select 'ok'
+
+## Create user grader
+```
+sudo adduser grader
+sudo nano /etc/sudoers.d/grader
+```
+This will open an empty file
+type `grader ALL=(ALL:ALL) ALL`
+save and exit
+
