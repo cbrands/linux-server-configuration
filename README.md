@@ -13,4 +13,17 @@ I got one remark that
 
 As I didn't know what amazon had locally configured I kept the original, which was default.
 
-## Firewall and ssh
+## ssh
+* Use `sudo nano /etc/ssh/sshd_config` and then change Port 22 to Port 2200 , save & quit.
+* Reload SSH using `sudo service ssh restart`.
+Now the big orange button connect to ssh no longer works as it assumes port 22.
+so download the private key (see instructor notes) and put it inside $HOME/.ssh. Now set permissions with
+
+```
+chmod 600 $HOME/.ssh/<your keypair file>
+chmod 700 $HOME/.ssh
+```
+Now login with
+```
+ssh -p 2200 -i <your home directory>/.ssh/<your keypair file> ubuntu@35.156.112.239
+```
