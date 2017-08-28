@@ -16,8 +16,8 @@ As I didn't know what amazon had locally configured I kept the original, which w
 ## ssh
 * Use `sudo nano /etc/ssh/sshd_config` and then change Port 22 to Port 2200 , save & quit.
 * Reload SSH using `sudo service ssh restart`.
-Now the big orange button connect to ssh no longer works as it assumes port 22.
-so download the private key (see instructor notes) and put it inside $HOME/.ssh. Now set permissions with
+Now the big orange button "connect using ssh" no longer works as it assumes port 22.
+so I downloaded the private key and put it inside $HOME/.ssh. Now set permissions with
 
 ```
 chmod 600 $HOME/.ssh/<your keypair file>
@@ -25,7 +25,7 @@ chmod 700 $HOME/.ssh
 ```
 Now login with
 ```
-ssh -p 2200 -i <your home directory>/.ssh/<your keypair file> ubuntu@35.156.112.239
+ssh -p 2200 -i ~/.ssh/LightsailDefaultPrivateKey-eu-central-1.pem ubuntu@35.156.112.239
 ```
 
 ## Firewall
@@ -75,4 +75,37 @@ sudo nano /etc/sudoers.d/grader
 This will open an empty file
 type `grader ALL=(ALL:ALL) ALL`
 save and exit
+
+## setup ssh keys for grader
+* On the local machine type `ssh-keygen -f ~/.ssh/grader`
+* open the file ~/.ssh/grader.pub in a text editor
+* On the server type
+```
+su grader
+mkdir /home/grader/.ssh
+nano /home/grader/.ssh/authorized_keys
+```
+* Copy the contents of ~/.ssh/grader.pub on the local machine to /home/grader/.ssh/authorized_keys on the server.
+* set permissions on the server by typing the following commands
+```
+chmod 700 /home/grader/.ssh
+chmod 644 /home/grader/.ssh/authorized_keys
+sudo service ssh restart
+exit  #to go back to user ubuntu
+exit  #to logout
+```
+Now we can login using user grader
+```
+ssh -p 2200 -i ~/.ssh/grader grader@35.156.112.239
+```
+
+## disable root login and force key based authentication
+```
+sudo nano /etc/ssh/sshd_config
+
+```
+* set PasswordAuthentication to no 
+* set PermitRootLogin to no
+* save the file
+* sudo service ssh restart
 
