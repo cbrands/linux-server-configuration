@@ -27,3 +27,36 @@ Now login with
 ```
 ssh -p 2200 -i <your home directory>/.ssh/<your keypair file> ubuntu@35.156.112.239
 ```
+
+## Firewall
+The firewall was configured by typing the following commands
+
+```
+# default block all incoming ports
+sudo ufw default deny incoming
+# default open all outgoing ports
+sudo ufw default allow outgoing
+# we had ssh configured on port 2200
+sudo ufw allow 2200/tcp
+# open http port
+sudo ufw allow 80/tcp
+# open ntp port
+sudo ufw allow 123/udp
+# enable firewall
+sudo ufw enable
+```
+chaeck the firewall status by typing sudo ufw status
+
+```
+sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+2200/tcp                   ALLOW       Anywhere                  
+80/tcp                     ALLOW       Anywhere                  
+123/udp                    ALLOW       Anywhere                  
+2200/tcp (v6)              ALLOW       Anywhere (v6)             
+80/tcp (v6)                ALLOW       Anywhere (v6)             
+123/udp (v6)               ALLOW       Anywhere (v6)    
+```
