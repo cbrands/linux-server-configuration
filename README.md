@@ -1,5 +1,11 @@
 # linux-server-configuration
 
+
+# Update
+
+## As I graduated I no longer need this server instance and I deleted it.
+
+
 ## How to use
 You can visit the page at http://35.156.112.239/ note that google authentication does not work as I don't have a domain name and google authentication does not work with public ip adresses. But otherwise you can click through the application and see it work.
 
