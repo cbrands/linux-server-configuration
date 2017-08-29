@@ -1,5 +1,14 @@
 # linux-server-configuration
 
+## How to use
+You can visit the page at http://35.156.112.239/ note that google authentication does not work as I don't have a domain name and google authentication does not work with public ip adresses. But otherwise you can click through the application and see it work.
+
+To log in server you need a key. Create a file ~/.ssh/grader, Open it with a texteditor and copy and paste the contents of "Notes to Reviewer" into the file. then save. The you can log infrom the terminal with the command
+```
+ssh -p 2200 -i ~/.ssh/grader grader@35.156.112.239
+```
+Note: these instruction represent how I log in from my mac. If you use Windows you need to do something similar with putty.
+
 ## Setup A secure server
 ### upgrading packages 
 All packages were upgraded on 28th of august 2017 at 13:32 (Timezone westerneurope) with the following commands
@@ -203,6 +212,7 @@ Apparently some dependencies need to be installed using the ubuntu packagemanage
 sudo apt-get install python3-flask
 sudo apt-get install python3-sqlalchemy
 sudo apt-get install python3-psycopg2
+sudo apt-get install python3-oauth2client
 ```
 
 ## And finally!
