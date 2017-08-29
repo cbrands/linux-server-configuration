@@ -11,7 +11,7 @@ Note: these instruction represent how I log in from my mac. If you use Windows y
 
 ## Setup A secure server
 ### upgrading packages 
-All packages were upgraded on 28th of august 2017 at 13:32 (Timezone westerneurope) with the following commands
+All packages were upgraded on 29th of august 2017 at 16:04 (Timezone westerneurope) with the following commands
 ```
 sudo apt-get update
 sudo apt-get upgrade
@@ -206,7 +206,7 @@ application.secret_key = 'super_secret_key'
 
 restart apache with `sudo apache2ctl restart`
 
-### And the it didn't work
+### And then it didn't work
 Apparently some dependencies need to be installed using the ubuntu packagemanager in order to work with apache.
 ```
 sudo apt-get install python3-flask
@@ -214,6 +214,9 @@ sudo apt-get install python3-sqlalchemy
 sudo apt-get install python3-psycopg2
 sudo apt-get install python3-oauth2client
 ```
+
+## Yes it works
+Time for a little dance. :-)
 
 ## And finally!
 One more
