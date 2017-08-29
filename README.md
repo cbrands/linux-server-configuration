@@ -149,11 +149,30 @@ RedirectMatch 404 ufsd-p4-petstore/.git
 ```
 
 ### Adapt the source to the database
-cd ufsd-p4-petstore/
+```
+cd ufsd-p4-petstore/vagrant
+sudo nano database_setup.py
+```
+replace
+'sqlite:///petstore.db'
+with
+'postgresql://catalog:catalog@localhost/catalog' and add `import psycopg2` to the imports
+save file
+repeat for populate_database.py and catalog.py
 
 ### Prepare python
+sudo apt-get install python3-pip
+pip3 install psycopg2
+pip3 install SQLAlchemy
+pip3 install Flask
+pip3 install oauth2client
 
 ### finish the application server
+Create tables and populate the database with testdata.
+```
+python3 database_setup.py
+python3 populate_database.py
+```
 
 ## Sources used
 Most of the information I needed came from the udacity fullstack nanodegree videos.
@@ -161,3 +180,5 @@ Other sources.
 * [Onetomarket](https://www.onetomarket.nl/blog/seo/301-redirect-tutorial/)
 * [Amazon](https://forums.aws.amazon.com/thread.jspa?threadID=162514)
 * [Ubuntu](https://askubuntu.com/questions/386928/default-permissions-for-var-www)
+* [Postgresql](https://wiki.postgresql.org/wiki/Psycopg2#Installation)
+* [Stackoverflow](https://stackoverflow.com/questions/6587507/how-to-install-pip-with-python-3)
