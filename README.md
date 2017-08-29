@@ -1,6 +1,7 @@
 # linux-server-configuration
 
-## upgrading packages 
+## Setup A secure server
+### upgrading packages 
 All packages were upgraded on 28th of august 2017 at 13:32 (Timezone westerneurope) with the following commands
 ```
 sudo apt-get update
@@ -13,7 +14,7 @@ I got one remark that
 
 As I didn't know what amazon had locally configured I kept the original, which was default.
 
-## ssh
+### ssh
 * Use `sudo nano /etc/ssh/sshd_config` and then change Port 22 to Port 2200 , save & quit.
 * Reload SSH using `sudo service ssh restart`.
 Now the big orange button "connect using ssh" no longer works as it assumes port 22.
@@ -28,7 +29,7 @@ Now login with
 ssh -p 2200 -i ~/.ssh/LightsailDefaultPrivateKey-eu-central-1.pem ubuntu@35.156.112.239
 ```
 
-## Firewall
+### Firewall
 The firewall was configured by typing the following commands
 
 ```
@@ -61,13 +62,13 @@ To                         Action      From
 123/udp (v6)               ALLOW       Anywhere (v6)    
 ```
 
-## Configure Local timezone to UTC
+### Configure Local timezone to UTC
 Timezone can be set with `sudo dpkg-reconfigure tzdata`
 * select 'None of the above'
 * select 'UTC'
 * select 'ok'
 
-## Create user grader
+### Create user grader
 ```
 sudo adduser grader
 sudo nano /etc/sudoers.d/grader
@@ -76,7 +77,7 @@ This will open an empty file
 type `grader ALL=(ALL:ALL) ALL`
 save and exit
 
-## setup ssh keys for grader
+### setup ssh keys for grader
 * On the local machine type `ssh-keygen -f ~/.ssh/grader`
 * open the file ~/.ssh/grader.pub in a text editor
 * On the server type
@@ -99,7 +100,7 @@ Now we can login using user grader
 ssh -p 2200 -i ~/.ssh/grader grader@35.156.112.239
 ```
 
-## disable root login and force key based authentication
+### disable root login and force key based authentication
 ```
 sudo nano /etc/ssh/sshd_config
 
@@ -108,4 +109,10 @@ sudo nano /etc/ssh/sshd_config
 * set PermitRootLogin to no
 * save the file
 * sudo service ssh restart
+
+## Setup a webapplication server
+### Apache
+Type `sudo apt-get install apache2`. Now the default apache site can be admired at http://35.156.112.239/.
+
+![apache screen](/screenshots/apache.png "apache screen")
 
