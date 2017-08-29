@@ -116,3 +116,22 @@ Type `sudo apt-get install apache2`. Now the default apache site can be admired 
 
 ![apache screen](/screenshots/apache.png "apache screen")
 
+### mod_wsgi
+Type the following commands
+```
+sudo apt-get install libapache2-mod-wsgi
+sudo apache2ctl restart
+```
+### PostgreSQL
+Install PostgreSQL by typing `sudo apt-get install postgresql`
+Login as user "postgres" `sudo su - postgres`
+Start the PostgreSQL shell `psql`
+In the PostGreSQL shell type the following commands
+```
+CREATE DATABASE catalog;
+CREATE USER catalog;
+ALTER ROLE catalog WITH PASSWORD 'catalog';
+GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog;
+\q
+```
+Leave user postgres `exit`
