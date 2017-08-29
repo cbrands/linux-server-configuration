@@ -135,3 +135,29 @@ GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog;
 \q
 ```
 Leave user postgres `exit`
+
+### Get the source
+The command `git --version` showed that the latest version of git was already installed
+```
+cd /var/www
+git clone https://github.com/cbrands/ufsd-p4-petstore.git
+sudo nano .htaccess
+```
+In this file add the following line
+```
+RedirectMatch 404 ufsd-p4-petstore/.git
+```
+
+### Adapt the source to the database
+cd ufsd-p4-petstore/
+
+### Prepare python
+
+### finish the application server
+
+## Sources used
+Most of the information I needed came from the udacity fullstack nanodegree videos.
+Other sources.
+* [Onetomarket](https://www.onetomarket.nl/blog/seo/301-redirect-tutorial/)
+* [Amazon](https://forums.aws.amazon.com/thread.jspa?threadID=162514)
+* [Ubuntu](https://askubuntu.com/questions/386928/default-permissions-for-var-www)
