@@ -119,7 +119,7 @@ Type `sudo apt-get install apache2`. Now the default apache site can be admired 
 ### mod_wsgi
 Type the following commands
 ```
-sudo apt-get install libapache2-mod-wsgi
+sudo apt-get install libapache2-mod-wsgi-py3
 sudo apache2ctl restart
 ```
 ### PostgreSQL
@@ -173,6 +173,44 @@ Create tables and populate the database with testdata.
 python3 database_setup.py
 python3 populate_database.py
 ```
+Update apache configuration
+```
+sudo nano /etc/apache2/sites-enabled/000-default.conf
+```
+Inside the `<VirtualHost *:80>` tag paste `WSGIScriptAlias / /var/www/ufsd-p4-petstore/vagrant/mod_wsgi.wsgi`
+
+Create a wsgi file
+```
+sudo nano /var/www/ufsd-p4-petstore/vagrant/mod_wsgi.wsgi
+```
+paste the following
+```
+#!/usr/bin/env python3
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/ufsd-p4-petstore/vagrant/")
+
+from catalog import app as application
+application.secret_key = 'super_secret_key'
+```
+
+restart apache with `sudo apache2ctl restart`
+
+### And the it didn't work
+Apparently some dependencies need to be installed using the ubuntu packagemanager in order to work with apache.
+```
+sudo apt-get install python3-flask
+sudo apt-get install python3-sqlalchemy
+sudo apt-get install python3-psycopg2
+```
+
+## And finally!
+One more
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
 
 ## Sources used
 Most of the information I needed came from the udacity fullstack nanodegree videos.
@@ -182,3 +220,5 @@ Other sources.
 * [Ubuntu](https://askubuntu.com/questions/386928/default-permissions-for-var-www)
 * [Postgresql](https://wiki.postgresql.org/wiki/Psycopg2#Installation)
 * [Stackoverflow](https://stackoverflow.com/questions/6587507/how-to-install-pip-with-python-3)
+* [Tero Karvinen](http://terokarvinen.com/2016/deploy-flask-python3-on-apache2-ubuntu)
+* [Stackoverflow](https://stackoverflow.com/questions/34785690/execute-hello-world-with-flask-importerror-no-module-named-flask)
